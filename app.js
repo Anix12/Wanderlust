@@ -46,20 +46,20 @@ app.get("/", (req, res) => {
 });
 
 
-// const store = MongoStore.create({
-//     mongoUrl: dbUrl,
-//     crypto: {
-//         secret: process.env.SECRET,
-//     },
-//     touchAfter: 24 * 3600,
-// });
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: process.env.SECRET,
+    },
+    touchAfter: 24 * 3600,
+});
 
-// store.on('error', (err) => {
-//     console.log("Error in Session store: " + err);
-// });
+store.on('error', (err) => {
+    console.log("Error in Session store: " + err);
+});
 
 const sessionOption = {
-    // store,
+    store,
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
