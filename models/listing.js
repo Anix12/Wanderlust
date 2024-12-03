@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Scheme = mongoose.Schema;
-const Review=require("./Review.js");
+const Review = require("./Review.js");
 
 let listingScheme = new Scheme({
     title: {
@@ -10,10 +10,10 @@ let listingScheme = new Scheme({
         type: String
     },
     image: {
-       url :String,
-       filename:String,
+        url: String,
+        filename: String,
     },
-    price: {    
+    price: {
         type: Number
     },
     location: {
@@ -28,28 +28,32 @@ let listingScheme = new Scheme({
             ref: "Review",
         },
     ],
-    owner:{
-        type:Scheme.Types.ObjectId,
-        ref:"User"
+    owner: {
+        type: Scheme.Types.ObjectId,
+        ref: "User"
     },
-    geometry:{
+    geometry: {
         type: {
             type: String, // Don't do `{ location: { type: String } }`
             enum: ['Point'], // 'location.type' must be 'Point'
             required: true
-          },
-          coordinates: {
+        },
+        coordinates: {
             type: [Number],
             required: true
-          }
+        }
+    },
+    kind: {
+        type: String,
+        enum: ["Trending", "Rooms", "Mountains", "castles", "Farms", "Arctic", "Amazing pools", "Iconic Cities"],
     }
 });
 
 //When Listing Delete Our Reviews also deleted middleWare
-listingScheme.post("findOneAndDelete", async(listing)=>{
-  if(listing){
-    await Review.deleteMany({_id: {$in: listing.reviews}});
-  }
+listingScheme.post("findOneAndDelete", async (listing) => {
+    if (listing) {
+        await Review.deleteMany({ _id: { $in: listing.reviews } });
+    }
 });
 
 const Listing = mongoose.model("Listing", listingScheme);

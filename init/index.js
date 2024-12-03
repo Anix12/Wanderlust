@@ -8,12 +8,12 @@ main()
     .catch((err) => { console.log(err) });
 
 async function main() {
-    await mongoose.connect('mongodb://127.0.0.1:27017/airbub');
+    await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
 }
 
 const initDB = (async () => {
     await Listing.deleteMany({});
-    initData.data= initData.data.map((obj)=>({...obj, owner: '6741b9edd1dc848a05d86996' }));
+    initData.data= initData.data.map((obj)=>({...obj, owner: '674eda71e3193320284131d9' }));
     await Listing.insertMany(initData.data);
     console.log("data Was Initialite");
 });

@@ -10,7 +10,7 @@ const { storage } = require("../cloudconfig.js");
 const upload = multer({ storage })
 
 
-// index Route // new Listing Create route 
+// index Route // new Listing Create route z
 router
     .route("/")
     .get(WrapAsync(controllerListing.index))
@@ -20,10 +20,15 @@ router
 //New Listing
 router.get("/new", isLoggedIn, WrapAsync(controllerListing.renderNewForm));
 
+router.route("/type/:name")
+    .get(WrapAsync(controllerListing.type));
 
+//search bar
+router.route("/search")
+    .get(controllerListing.search);
 
-//Delete Route //update route //Show Route
-router.route("/:id")
+    //Delete Route //update route //Show Route
+    router.route("/:id")
     .get(WrapAsync(controllerListing.renderShowRoute))
     .delete(isLoggedIn, isOwner, WrapAsync(controllerListing.DestroyRoute))
     .put(isLoggedIn, isOwner, upload.single('listing[image]'), validateListing, WrapAsync(controllerListing.UpdateRoute));

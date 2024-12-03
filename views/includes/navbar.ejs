@@ -127,7 +127,7 @@ form {
                 <a class="nav-link" href="/listings/new">Airbnb Your Home</a>
             </div>
 
-            <form class="d-flex navbar-nav ms-auto position-relative" role="search" onsubmit="return false;">
+            <form class="d-flex navbar-nav ms-auto position-relative" role="search" method="get" action="/listings/search">
                 <input 
                     class="form-control me-2 btn search-input" 
                     type="search" 
@@ -135,6 +135,7 @@ form {
                     id="searchBar" 
                     oninput="showSuggestions(this.value)" 
                     autocomplete="off" 
+                    name="key"
                 >
                 <button class="btn search-btn" type="submit">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>Search

@@ -1,6 +1,6 @@
 const Listing = require("../models/listing");
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
-const MapToken=process.env.MAP_TOKEN;
+const MapToken = process.env.MAP_TOKEN;
 
 const geocodingClient = mbxGeocoding({ accessToken: MapToken });
 
@@ -20,9 +20,9 @@ module.exports.renderEditForm = async (req, res) => {
         req.flash("error", "Listing Doesn't Exist");
         res.redirect("/listings");
     }
-    let originalImage=listing.image.url;
-    originalImage= originalImage.replace("/upload","/upload/h_300,w_250");
-    res.render("listings/edit.ejs", { listing , originalImage });
+    let originalImage = listing.image.url;
+    originalImage = originalImage.replace("/upload", "/upload/h_300,w_250");
+    res.render("listings/edit.ejs", { listing, originalImage });
 }
 module.exports.renderShowRoute = async (req, res) => {
     let { id } = req.params;
@@ -42,20 +42,19 @@ module.exports.renderShowRoute = async (req, res) => {
 }
 
 module.exports.createNewList = async (req, res, next) => {
-
-   let responce=await geocodingClient.forwardGeocode({
+    let responce = await geocodingClient.forwardGeocode({
         query: req.body.listing.location,
         limit: 1
-      })
+    })
         .send()
+
     let url = req.file.path;
     let filename = req.file.filename;
     let newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
     newListing.image = { url, filename };
-    newListing.geometry=responce.body.features[0].geometry;
-    let savedListing =await newListing.save();
-    console.log(savedListing);
+    newListing.geometry = responce.body.features[0].geometry;
+    let savedListing = await newListing.save();
     req.flash("sucess", "New Listing Created !");
     res.redirect("/listings");
 }
@@ -80,4 +79,39 @@ module.exports.UpdateRoute = async (req, res) => {
     }
     req.flash("sucess", "Listing Updated!");
     res.redirect(`/listings/${id}`);
+}
+module.exports.type = async (req, res) => {
+    let { name } = req.params;
+    let allListings = await Listing.find({ kind: { $eq: name } });
+    res.render("./listings/index.ejs", { allListings });
+}
+
+module.exports.search = async (req, res) => {
+    try {
+        const { key: parameter, country, title } = req.query;
+
+        const query = {};
+
+        if (parameter) {
+            query.location = { $regex: parameter, $options: "i" };
+        }
+        if (country) {
+            query.country = { $regex: country, $options: "i" };
+        }
+
+        if (title) {
+            const escapedTitle = title.replace(/[.*+?^=!:${}()|\[\]\/\\]/g, "\\$&");
+            query.title = { title: { $regex: escapedTitle, $options: "i" } };
+        }
+
+        console.log("Constructed query:", query);
+        let allListings = await Listing.find(query);
+
+        console.log("Listings found:", allListings);
+
+        res.render("listings/search.ejs", { allListings });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 }
