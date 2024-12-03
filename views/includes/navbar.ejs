@@ -1,0 +1,159 @@
+<style>
+.search-btn{
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0rem 1rem 0rem 1rem;
+    opacity: 0.9;
+}
+.search-btn:hover{
+    opacity: 1;
+    background-color: #fe424d;
+    color: #fff;
+}
+.search-icon{
+    display: inline;
+    margin-right: 8px;
+}
+.search-input{
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 0.5rem 3rem;
+    font-size: 1rem;
+}
+.search-input:hover{
+    border:  1px solid black;
+}
+/* --------------------------------------------- */
+/* General Styles for Form */
+form {
+    position: relative; /* Ensure the suggestions dropdown is positioned relative to the form */
+}
+
+/* Search Input Field */
+.search-input {
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 0.5rem 3rem;
+    width: 100%; /* Full width */
+    transition: box-shadow 0.3s ease, border 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(189, 10, 10, 0.5);
+    border-color: #fe424d; /* Highlight on focus */
+}
+    
+/* Search Button */
+.search-btn {
+    background-color: #fe424d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background-color: #fe424d;
+}
+
+/* Suggestions Dropdown */
+.suggestions-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Match the width of the input field */
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: absolute;
+    top: 100%; /* Position directly below the input field */
+    left: 0;
+    z-index: 1000; /* Ensure it appears above other elements */
+    display: none; /* Hidden by default */
+    max-height: 200px; /* Limit the height for scrollability */
+    overflow-y: auto; /* Enable scrolling for long lists */
+}
+
+/* Show Suggestions */
+.suggestions-list.show {
+    display: block;
+}
+
+/* Suggestion Items */
+.suggestions-list li {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.suggestions-list li:hover {
+    background-color: #f8f9fa; /* Light hover effect */
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .search-input {
+        font-size: 0.9rem;
+    }
+
+    .search-btn {
+        font-size: 0.9rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .suggestions-list li {
+        font-size: 0.9rem;
+    }
+}
+
+
+</style>
+
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass ms-2"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/listings">Explore</a>
+                <a class="nav-link" href="/listings/new">Airbnb Your Home</a>
+            </div>
+
+            <form class="d-flex navbar-nav ms-auto position-relative" role="search" onsubmit="return false;">
+                <input 
+                    class="form-control me-2 btn search-input" 
+                    type="search" 
+                    placeholder="Search Destination" 
+                    id="searchBar" 
+                    oninput="showSuggestions(this.value)" 
+                    autocomplete="off" 
+                >
+                <button class="btn search-btn" type="submit">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>Search
+                </button>
+                <!-- Suggestions Dropdown -->
+                <ul class="suggestions-list position-absolute bg-white shadow" id="suggestions"></ul>
+            </form> 
+            
+
+            <div class="navbar-nav ms-auto">
+                <!-- req.current user if some one logged in then its some value but no one then its undefined its passport in build funcationality Aniket -->
+                <% if(!Curruser){ %>
+                    <a class="nav-link active  ms-3" aria-current="page" href="/signup"> Sign Up<i class="fa-solid fa-user-plus ms-2"></i></a>
+                    <a class="nav-link active" href="/login">Log In  <i class="fa-solid fa-right-to-bracket"></i></a>
+                    <% } %>
+                        <% if(Curruser){ %>
+                            <a class="nav-link active btn btn-light" href="/logout">Log Out</a>
+                            <% } %>
+            </div>
+        </div>
+    </div>
+</nav>
