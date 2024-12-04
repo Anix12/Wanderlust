@@ -109,7 +109,15 @@ module.exports.search = async (req, res) => {
 
         console.log("Listings found:", allListings);
 
-        res.render("listings/search.ejs", { allListings });
+        if (allListings.length === 0) {
+            return res.render("listings/search.ejs", {
+                allListings: [],
+                message: `No listings related to "${country || parameter || title}" yet.`,
+            });
+        }
+
+        // Render the listings if found
+        res.render("listings/search.ejs", { allListings, message: null });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
