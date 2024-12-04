@@ -38,7 +38,7 @@ main()
     .catch((err) => { console.log(err) });
 
 async function main() {
-    await mongoose.connect(dburl); //change kar jab deploy kara ga
+    await mongoose.connect(dbUrl); //change kar jab deploy kara ga
 }
 
 const store = MongoStore.create({
