@@ -31,30 +31,30 @@ const reviewsRoute = require("./Routes/Review.js");
 const userRoute = require("./Routes/user.js");
 
 const dbUrl = process.env.ATLAS_DB;
-let mongoUrl= "mongodb://127.0.0.1:27017/wanderlust"
+// let mongoUrl= "mongodb://127.0.0.1:27017/wanderlust"
 
 main()
     .then(() => { console.log("Connection Sucessful with DB") })
     .catch((err) => { console.log(err) });
 
 async function main() {
-    await mongoose.connect(mongoUrl); //change kar jab deploy kara ga
+    await mongoose.connect(dbUrl); //change kar jab deploy kara ga
 }
 
-// const store = MongoStore.create({
-//     mongoUrl: dbUrl,
-//     crypto: {
-//         secret: process.env.SECRET,
-//     },
-//     touchAfter: 24 * 3600,
-// });
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: process.env.SECRET,
+    },
+    touchAfter: 24 * 3600,
+});
 
-// store.on('error', (err) => {
-//     console.log("Error in Session store: " + err);
-// });
+store.on('error', (err) => {
+    console.log("Error in Session store: " + err);
+});
 
 const sessionOption = {
-    // store,
+    store,
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
