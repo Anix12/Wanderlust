@@ -31,7 +31,7 @@ const reviewsRoute = require("./Routes/Review.js");
 const userRoute = require("./Routes/user.js");
 
 const dbUrl = process.env.ATLAS_DB;
-// let mongoUrl= "mongodb://127.0.0.1:27017/wanderlust"
+let mongoUrl= "mongodb://127.0.0.1:27017/wanderlust"
 
 main()
     .then(() => { console.log("Connection Sucessful with DB") })
@@ -40,11 +40,6 @@ main()
 async function main() {
     await mongoose.connect(dbUrl); //change kar jab deploy kara ga
 }
-
-app.get("/", (req, res) => {
-    res.send("Hi ! I Am Root");
-});
-
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
