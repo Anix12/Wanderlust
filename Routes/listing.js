@@ -19,6 +19,11 @@ router
 
 //New Listing
 router.get("/new", isLoggedIn, WrapAsync(controllerListing.renderNewForm));
+//Privacy
+router.get("/privacy", controllerListing.privacy);
+router.get("/terms", controllerListing.terms);
+router.get("/contact", controllerListing.contact)
+
 
 router.route("/type/:name")
     .get(WrapAsync(controllerListing.type));
@@ -35,6 +40,7 @@ router.route("/search")
 
 //edit Route
 router.get("/:id/edit", isLoggedIn, isOwner, WrapAsync(controllerListing.renderEditForm));
+
 
 
 module.exports = router;

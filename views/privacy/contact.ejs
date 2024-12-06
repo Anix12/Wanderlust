@@ -1,0 +1,69 @@
+<% layout("/layout/boilerplate.ejs") %>
+
+<div class="container mt-5 mb-5">
+  <div class="card shadow-sm p-5 border-0">
+    <h1 class="text-center mb-4 text-primary">Contact Us</h1>
+    <p class="text-center">
+      Have questions or need help? Feel free to reach out to us by filling out the form below.
+    </p>
+    
+    <form action="/listings" method="POST" class="mt-4">
+      <div class="mb-3">
+        <label for="name" class="form-label"><strong>Name</strong></label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="name" 
+          name="name" 
+          placeholder="Enter your full name" 
+          required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label"><strong>Email</strong></label>
+        <input 
+          type="email" 
+          class="form-control" 
+          id="email" 
+          name="email" 
+          placeholder="Enter your email address" 
+          required>
+      </div>
+
+      <div class="mb-3">
+        <label for="subject" class="form-label"><strong>Subject</strong></label>
+        <input 
+          type="text" 
+          class="form-control" 
+          id="subject" 
+          name="subject" 
+          placeholder="Enter the subject of your message" 
+          required>
+      </div>
+
+      <div class="mb-3">
+        <label for="message" class="form-label"><strong>Message</strong></label>
+        <textarea 
+          class="form-control" 
+          id="message" 
+          name="message" 
+          rows="5" 
+          placeholder="Type your message here" 
+          required></textarea>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary btn-lg px-4">Send Message</button>
+      </div>
+    </form>
+
+    <div class="mt-5 text-center">
+      <h5>Other Ways to Reach Us</h5>
+      <p>
+        <strong>Email:</strong> <a href="mailto:info@example.com" class="text-primary">Wanderlust@example.com</a><br>
+        <strong>Phone:</strong> +1 (123) 456-7890<br>
+        <strong>Address:</strong> 123 Main Street, City, Country
+      </p>
+    </div>
+  </div>
+</div>

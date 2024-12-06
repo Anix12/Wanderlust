@@ -123,3 +123,12 @@ module.exports.search = async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 }
+module.exports.privacy=(req, res)=>{
+    res.render("./privacy/privacy.ejs");
+}
+module.exports.terms=(req, res)=>{
+    res.render("./privacy/termsCond.ejs");
+}
+module.exports.contact=(req, res)=>{
+    res.render("./privacy/contact.ejs");
+}
