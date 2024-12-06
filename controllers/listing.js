@@ -127,7 +127,7 @@ module.exports.privacy=(req, res)=>{
     res.render("./privacy/privacy.ejs");
 }
 module.exports.terms=(req, res)=>{
-    res.render("./privacy/termsCond.ejs");
+    res.render("./privacy/TermsCond.ejs");
 }
 module.exports.contact=(req, res)=>{
     res.render("./privacy/contact.ejs");
