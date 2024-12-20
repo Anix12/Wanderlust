@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <% if (Curruser && ( Curruser._id.equals("674f44be06eda91d9c8d44b0") || Curruser._id.equals(listing.owner._id) )) { %>
+        <% if (Curruser && ( Curruser._id.equals("674eaa54e70a4148294cb524") || Curruser._id.equals(listing.owner._id) )) { %>
             <div class="col-8 offset-3 show-btn">
                 <form method="get" action="/listings/<%=listing._id%>/edit">
                     <button class="btn btn-danger">Edit</button>
@@ -95,7 +95,7 @@
                                         <p class="card-text">
                                             <%=reviews.comment%>
                                         </p>
-                                        <% if(Curruser && ( Curruser._id.equals("674f44be06eda91d9c8d44b0") || Curruser._id.equals(reviews.author._id))){%>
+                                        <% if(Curruser && ( Curruser._id.equals("674eaa54e70a4148294cb524") || Curruser._id.equals(reviews.author._id))){%>
                                             <form method="post"
                                                 action="/listings/<%=listing._id%>/reviews/<%=reviews._id%>?_method=Delete">
                                                 <button class="btn btn-sm btn-dark mb-2">Delete</button>
