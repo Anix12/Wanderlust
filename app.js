@@ -31,7 +31,7 @@ const reviewsRoute = require("./Routes/Review.js");
 const userRoute = require("./Routes/user.js");
 
 const dbUrl = process.env.ATLAS_DB;
-let mongoUrl= "mongodb://127.0.0.1:27017/wanderlust"
+// let mongoUrl= "mongodb://127.0.0.1:27017/wanderlust"
 
 main()
     .then(() => { console.log("Connection Sucessful with DB") })

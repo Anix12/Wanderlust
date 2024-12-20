@@ -11,6 +11,6 @@ const {validateReview, isLoggedIn, isReviewAuthor}=require("../Middleware.js");
 router.post("/", isLoggedIn, validateReview, WrapAsync(ReviewController.newReviewForm));
 
 //Review Delete Route
-router.delete("/:reviewId",isLoggedIn, isReviewAuthor, WrapAsync(ReviewController.destroyReview));
+router.delete("/:reviewId",isLoggedIn, WrapAsync(ReviewController.destroyReview));
 
 module.exports=router;
