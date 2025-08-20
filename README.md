@@ -1,11 +1,14 @@
 # 🏕️ Wanderlust – Airbnb Clone
   
-![Wanderlust Banner](https://via.placeholder.com/1200x300.png?text=Wanderlust+Banner)
+![Wanderlust Banner](https://img.shields.io/badge/Aniket%20Adhav-wanderlust-blueviolet?style=for-the-badge&logo=react)
   
 A full-stack web application inspired by Airbnb, where users can explore, create, and manage property listings with authentication and reviews.  
   
----  
+---   
   
+## 🚀 Live Demo  
+👉 [Try the Website](https://url-shortner-ochre-phi.vercel.app/)   
+    
 ## 🚀 Features  
   
 - 🔐 User Authentication (Login/Signup with Passport.js)  
